@@ -69,3 +69,20 @@ document.getElementById('eventForm').addEventListener('submit', e => {
   renderEvents();
   form.reset();
 });
+import { registerUser, loginUser, logoutUser } from "./auth.js";
+
+document.getElementById("signup").addEventListener("click", () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  registerUser(email, password);
+});
+
+document.getElementById("login").addEventListener("click", () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  loginUser(email, password);
+});
+
+document.getElementById("logout").addEventListener("click", () => {
+  logoutUser();
+});
