@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swap Society</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Optional: Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'YOUR_GA_ID');
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Swap Society 🌍</h1>
+    <nav>
+      <a href="#swapHub">Swap Hub</a> |
+      <a href="#events">Events</a> |
+      <a href="#support">Support Us ☕</a>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <h2>Trade Skills, Share Creativity, Build Community</h2>
+    <p>Join a global community where creatives trade skills, goods, and services.</p>
+    <a href="#swapHub" class="btn">Join Now</a>
+  </section>
+
+  <section id="support" class="cta">
+    <h2>Support Swap Society</h2>
+    <p>Love our community? Help creatives thrive by buying us a coffee ☕</p>
+    <a href="https://buymeacoffee.com/swapsociety" target="_blank" class="btn-coffee">Support Now</a>
+  </section>
+
+  <section id="swapHub">
+    <h2>Swap Hub</h2>
+    <div id="swapCards"></div>
+    <h3>Submit Your Swap</h3>
+    <form id="swapForm">
+      <input type="text" name="title" placeholder="Swap Title" required>
+      <input type="text" name="category" placeholder="Category" required>
+      <textarea name="description" placeholder="Description" required></textarea>
+      <input type="url" name="link" placeholder="Buy Me a Coffee link (optional)">
+      <button type="submit">Submit Swap</button>
+    </form>
+  </section>
+
+  <section id="events">
+    <h2>Upcoming Events & Workshops</h2>
+    <div id="eventCards"></div>
+    <h3>Submit Your Event</h3>
+    <form id="eventForm">
+      <input type="text" name="title" placeholder="Event Title" required>
+      <textarea name="description" placeholder="Description" required></textarea>
+      <input type="url" name="link" placeholder="Buy Me a Coffee link (optional)">
+      <button type="submit">Submit Event</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Swap Society. All rights reserved.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

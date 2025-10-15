@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "SwapSociety": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/SwapSociety/browser",
+            "index": "index.html",
+            "main": "main.js",
+            "polyfills": "",
+            "tsConfig": "tsconfig.json",
+            "assets": ["assets"],
+            "styles": ["styles.css"],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "SwapSociety"
+}
