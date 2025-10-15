@@ -1,88 +1,42 @@
-let swaps = [
-  { title: "Handmade Jewelry", description: "Trade for Guitar Lessons", link: "https://buymeacoffee.com/swapsociety", featured: true },
-  { title: "Custom Illustration", description: "Trade for Music Lessons", link: "", featured: false }
-];
+// main.js
 
-let events = [
-  { title: "Virtual Art Swap", description: "Weekly event for creatives", link: "https://buymeacoffee.com/swapsociety" },
-  { title: "Sustainable Living Workshop", description: "Monthly eco-workshop", link: "" }
-];
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-const swapContainer = document.getElementById('swapCards');
-const eventContainer = document.getElementById('eventCards');
+// Paste your Firebase config here
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "swapsociety.firebaseapp.com",
+  projectId: "swapsociety",
+  storageBucket: "swapsociety.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
 
-function renderSwaps() {
-  swapContainer.innerHTML = '';
-  swaps.forEach(swap => {
-    const div = document.createElement('div');
-    div.classList.add('swap-card');
-    if(swap.featured) div.classList.add('featured');
-    div.innerHTML = `
-      <h3>${swap.featured ? '🌟 ' : ''}${swap.title}</h3>
-      <p>${swap.description}</p>
-      <a href="${swap.link || 'https://buymeacoffee.com/swapsociety'}" target="_blank">Support ☕</a>
-    `;
-    swapContainer.appendChild(div);
-  });
-}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-function renderEvents() {
-  eventContainer.innerHTML = '';
-  events.forEach(event => {
-    const div = document.createElement('div');
-    div.classList.add('event-card');
-    div.innerHTML = `
-      <h3>${event.title}</h3>
-      <p>${event.description}</p>
-      <a href="${event.link || 'https://buymeacoffee.com/swapsociety'}" target="_blank">Support ☕</a>
-    `;
-    eventContainer.appendChild(div);
-  });
-}
-
-// Initial render
-renderSwaps();
-renderEvents();
-
-// Form submissions
-document.getElementById('swapForm').addEventListener('submit', e => {
+// --- Handle Swap Form ---
+document.getElementById('swapForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const form = e.target;
-  swaps.push({
-    title: form.title.value,
-    description: form.description.value,
-    link: form.link.value,
-    featured: false
-  });
-  renderSwaps();
-  form.reset();
+  const title = e.target.title.value;
+  const category = e.target.category.value;
+  const description = e.target.description.value;
+  const link = e.target.link.value;
+
+  await addDoc(collection(db, "swaps"), { title, category, description, link, timestamp: new Date() });
+  alert("Swap submitted successfully!");
+  e.target.reset();
 });
 
-document.getElementById('eventForm').addEventListener('submit', e => {
+// --- Handle Event Form ---
+document.getElementById('eventForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const form = e.target;
-  events.push({
-    title: form.title.value,
-    description: form.description.value,
-    link: form.link.value
-  });
-  renderEvents();
-  form.reset();
-});
-import { registerUser, loginUser, logoutUser } from "./auth.js";
+  const title = e.target.title.value;
+  const description = e.target.description.value;
+  const link = e.target.link.value;
 
-document.getElementById("signup").addEventListener("click", () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  registerUser(email, password);
-});
-
-document.getElementById("login").addEventListener("click", () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  loginUser(email, password);
-});
-
-document.getElementById("logout").addEventListener("click", () => {
-  logoutUser();
+  await addDoc(collection(db, "events"), { title, description, link, timestamp: new Date() });
+  alert("Event submitted successfully!");
+  e.target.reset();
 });
